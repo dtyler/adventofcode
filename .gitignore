@@ -37,3 +37,6 @@ build/
 # vim swap files
 *.swp
 *.swo
+
+#advent input files
+input*
