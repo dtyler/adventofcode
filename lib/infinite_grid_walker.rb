@@ -1,28 +1,31 @@
 require 'set'
+
 # day3
 class InfiniteGridWalker
-  def initialize(input)
+  def initialize(input, walker_count)
     @home = {}
     @home['0,0'] = 1
     @input = input
+    @walker_count = walker_count
   end
 
   def compute
-    x = y = 0
-    @input.each_char do |symbol|
+    x = Array.new(@walker_count, 0)
+    y = Array.new(@walker_count, 0)
+    @input.each_char.with_index do |symbol, index|
+      walker = index % @walker_count
       case symbol
       when '^'
-        x += 1
+        x[walker] += 1
       when '>'
-        y += 1
+        y[walker] += 1
       when 'v'
-        x -= 1
+        x[walker] -= 1
       when '<'
-        y -= 1
+        y[walker] -= 1
       end
-      update_home(x, y)
+      update_home(x[walker], y[walker])
     end
-    puts "\n#{@home}"
     @home.size
   end
 
